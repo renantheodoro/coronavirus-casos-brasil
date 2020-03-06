@@ -51,8 +51,9 @@ h1.main-question {
     text-align: center;
     line-height: 4rem;
     color: $question;
-
+    
     @media (max-width: 600px) {
+        margin-bottom: 2rem;
         font-size: 2rem;
     }
 
@@ -79,9 +80,12 @@ p.main-response {
     position: fixed;
     top: 50%;
     transform: translateY(-50%);
-
+    
     @media (max-width: 600px) {
+        position: unset;
         font-size: 8rem;
+        transform: translateY(0);
+        margin-bottom: 2rem;
     }
 }
 
@@ -143,10 +147,24 @@ footer {
 
     display: flex;
 
+    @media (max-width: 600px) {
+        flex-direction: column;
+        position: unset;
+
+        margin-left: -2rem;
+        margin-right: -2rem;
+        width: calc(100% + (2rem * 2))
+    }
+
     &>div {
         width: 50%;
 
+        @media (max-width: 600px) {
+            width: 100%;
+            margin-bottom: 1rem;
+        }
     }
+
 
     .collaborators {
         li {
