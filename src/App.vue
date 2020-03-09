@@ -11,9 +11,12 @@ export default {
   name: 'App',
   components: {
     IndexReport
+  },
+  metaInfo: {
+    title: 'Coronavírus no Brasil',
+    titleTemplate: '%s | Quantos casos confirmados?'
   }
 };
 </script>
 
-<style>
-</style>
+<style></style>

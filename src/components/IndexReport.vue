@@ -1,8 +1,6 @@
 <template>
   <main>
     <section class="main-content">
-      <!-- <img src="@/assets/images/coronavirus.jpeg" alt=""> -->
-
       <h1 class="main-question">
         Quantos casos de <br />
         <strong class="highlight">Coronavírus</strong> no Brasil?
@@ -51,11 +49,10 @@
           </small>
         </p>
 
-        <p class="updated">
+        <p v-if="updatedAt" class="updated">
           <small
-            >Atualização em: <br>
-            <strong>06 de fevereiro de 2020</strong> às
-            <strong>19:00</strong></small
+            >Atualização em:
+            <strong>{{updatedAt}}</strong></small
           >
         </p>
       </div>
@@ -122,7 +119,8 @@ export default {
 
   data() {
     return {
-      report: null
+      report: null,
+      updatedAt: null
     };
   },
 
@@ -130,9 +128,26 @@ export default {
     this.axios
       .get(`https://dt6g6dr24g.execute-api.us-east-1.amazonaws.com/prod/casos`)
       .then(response => {
-        console.log('res', response.data.data);
         this.report = response.data.data;
+        this.updatedAt = this.getDate(response.data.meta.last_update);
       });
+  },
+
+  methods: {
+    getDate(date) {
+      let day;
+      let month;
+      let year;
+
+      let monthArr = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
+
+      day = date.split('/')[0];
+      month = monthArr[parseInt(date.split('/')[1])];
+      year = date.split('/')[2].replace(' ', ' às ');
+
+      return day + ' de ' + month + ' de ' + year;
+
+    }
   }
 };
 </script>
