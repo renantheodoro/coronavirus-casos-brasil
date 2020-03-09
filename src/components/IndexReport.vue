@@ -1,14 +1,17 @@
 <template>
   <main>
-    <h1 class="main-question">
-      Quantos casos de <br />
-      <strong class="highlight">Coronavirus</strong> no Brasil?
-    </h1>
-    <p v-if="report" class="main-response">
-      <big>{{ report.brazil.latest.cases }}</big>
-    </p>
+    <section class="main-content">
+      <!-- <img src="@/assets/images/coronavirus.jpeg" alt=""> -->
 
-    <!-- <ul class="locate-list">
+      <h1 class="main-question">
+        Quantos casos de <br />
+        <strong class="highlight">Coronavírus</strong> no Brasil?
+      </h1>
+      <p v-if="report" class="main-response">
+        <big>{{ report.brazil.latest.cases }}</big>
+      </p>
+
+      <!-- <ul class="locate-list">
       <li>
         <strong class="locate-title">
           São Paulo
@@ -31,6 +34,7 @@
         <span class="locate-report">3</span>
       </li>
     </ul> -->
+    </section>
 
     <footer>
       <div class="info-box">
@@ -42,14 +46,15 @@
               :key="index"
               :href="item.link"
               target="_blank"
-              ><strong>- {{ item.websitename }}</strong> <br
+              ><strong>{{ item.websitename }}</strong> <br
             /></a>
           </small>
         </p>
 
         <p class="updated">
           <small
-            >Atualização em <strong>06 de fevereiro de 2020</strong> às
+            >Atualização em: <br>
+            <strong>06 de fevereiro de 2020</strong> às
             <strong>19:00</strong></small
           >
         </p>
