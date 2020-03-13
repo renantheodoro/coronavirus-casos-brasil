@@ -142,7 +142,7 @@ export default {
       let monthArr = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
 
       day = date.split('/')[0];
-      month = monthArr[parseInt(date.split('/')[1])];
+      month = monthArr[parseInt(date.split('/')[1])-1];
       year = date.split('/')[2].replace(' ', ' às ');
 
       return day + ' de ' + month + ' de ' + year;
