@@ -2,36 +2,39 @@
   <main>
     <section class="main-content">
       <h1 class="main-question">
-        Quantos casos de <br />
-        <strong class="highlight">Coronavírus</strong> no Brasil?
+        Casos confirmados de<br />
+        <strong class="highlight">Coronavírus</strong> no Brasil
       </h1>
       <p v-if="report" class="main-response">
-        <big>{{ report.brazil.latest.cases }}</big>
+        <big>{{ report.cases }}</big>
       </p>
 
-      <!-- <ul class="locate-list">
-      <li>
-        <strong class="locate-title">
-          São Paulo
-        </strong>
-
-        <span class="locate-report">3</span>
-      </li>
-      <li>
-        <strong class="locate-title">
-          Rio de Janeiro
-        </strong>
-
-        <span class="locate-report">3</span>
-      </li>
-      <li>
-        <strong class="locate-title">
-          Minas Gerais
-        </strong>
-
-        <span class="locate-report">3</span>
-      </li>
-    </ul> -->
+      <!-- <ul class="locate-list"> 
+        <li>
+          <div class="card">
+            <div class="card-title">
+              São Paulo
+            </div>
+            <span class="card-content">3</span>
+          </div>
+        </li>
+        <li>
+          <div class="card">
+            <div class="card-title">
+              São Paulo
+            </div>
+            <span class="card-content">3</span>
+          </div>
+        </li>
+        <li>
+          <div class="card">
+            <div class="card-title">
+              São Paulo
+            </div>
+            <span class="card-content">3</span>
+          </div>
+        </li>
+      </ul>-->
     </section>
 
     <footer>
@@ -40,19 +43,19 @@
           <small
             >Fontes: <br />
             <a
-              v-for="(item, index) in report.brazil.latest.sources"
+              v-for="(source, index) in sources"
               :key="index"
-              :href="item.link"
+              :href="source.link"
               target="_blank"
-              ><strong>{{ item.websitename }}</strong> <br
+              ><strong>{{ source.website }}</strong> <br
             /></a>
           </small>
         </p>
 
         <p v-if="updatedAt" class="updated">
           <small
-            >Atualização em:
-            <strong>{{updatedAt}}</strong></small
+            >Atualização em: <br />
+            <strong>{{ updatedAt }}</strong></small
           >
         </p>
       </div>
@@ -107,19 +110,28 @@
         </ul>
       </div>
     </footer>
+
+    <Loader v-if="loader" />
   </main>
 </template>
 
 <script>
+import Loader from '@/components/Loader';
+
 export default {
   name: 'IndexReport',
+
+  components: { Loader },
+
   props: {
     msg: String
   },
 
   data() {
     return {
+      loader: true,
       report: null,
+      sources: null,
       updatedAt: null
     };
   },
@@ -128,8 +140,18 @@ export default {
     this.axios
       .get(`https://dt6g6dr24g.execute-api.us-east-1.amazonaws.com/prod/casos`)
       .then(response => {
-        this.report = response.data.data;
+        this.report = {
+          cases: response.data.data.brazil.latest.cases,
+          states: response.data.data.brazil.states
+        };
+        this.sources = response.data.data.brazil.latest.sources;
         this.updatedAt = this.getDate(response.data.meta.last_update);
+
+        console.log('report', this.report);
+        console.log('sources', this.sources);
+        console.log('updatedAt', this.updatedAt);
+
+        this.loader = false;
       });
   },
 
@@ -139,14 +161,26 @@ export default {
       let month;
       let year;
 
-      let monthArr = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
+      let monthArr = [
+        'janeiro',
+        'fevereiro',
+        'março',
+        'abril',
+        'maio',
+        'junho',
+        'julho',
+        'agosto',
+        'setembro',
+        'outubro',
+        'novembro',
+        'dezembro'
+      ];
 
       day = date.split('/')[0];
-      month = monthArr[parseInt(date.split('/')[1])-1];
+      month = monthArr[parseInt(date.split('/')[1]) - 1];
       year = date.split('/')[2].replace(' ', ' às ');
 
       return day + ' de ' + month + ' de ' + year;
-
     }
   }
 };
