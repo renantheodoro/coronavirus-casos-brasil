@@ -13,8 +13,8 @@ export default {
     IndexReport
   },
   metaInfo: {
-    title: 'Coronavírus no Brasil',
-    titleTemplate: '%s | Quantos casos confirmados?'
+    title: 'Coronavírus',
+    titleTemplate: '%s | Casos confirmados no Brasil'
   }
 };
 </script>

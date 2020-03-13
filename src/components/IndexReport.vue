@@ -147,10 +147,6 @@ export default {
         this.sources = response.data.data.brazil.latest.sources;
         this.updatedAt = this.getDate(response.data.meta.last_update);
 
-        console.log('report', this.report);
-        console.log('sources', this.sources);
-        console.log('updatedAt', this.updatedAt);
-
         this.loader = false;
       });
   },
