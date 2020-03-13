@@ -87,20 +87,20 @@ h1.main-question {
     position: relative;
 
     @media (max-width: 600px) {
-        margin-bottom: 2rem;
-        font-size: 2rem;
+        font-size: 1.2rem;
+        margin-bottom: 1.5rem;
     }
 
     .highlight {
-        color: $highlight;
         display: block;
-        text-transform: uppercase;
         font-size: 3.5rem;
+        text-transform: uppercase;
+        color: $highlight;
         line-height: 120%;
-
+        
         @media (max-width: 600px) {
             font-size: 2.5rem;
-            line-height: 3rem
+            line-height: 150%;
         }
     }
 }
