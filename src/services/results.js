@@ -69,6 +69,8 @@ export default new Vue({
 
       if(minutes >= 60) {
         messageInMinutes = '1 hora e ' + (minutes - 60) + ' minutos';
+      } else if(minutes < 1) {
+        messageInMinutes = 'menos de um minuto';
       } else {
         messageInMinutes = minutes + ' minutos';
       }
