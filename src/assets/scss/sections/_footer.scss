@@ -1,0 +1,153 @@
+footer {
+  position: relative;
+  width: 100%;
+  padding: 2rem;
+  background-color: $grey-blue;
+
+  display: flex;
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+    position: relative;
+  }
+
+  h2,
+  p {
+    color: #fff;
+  }
+
+  h2 {
+    margin-bottom: 1rem;
+  }
+
+  .column {
+    flex: 1;
+  }
+
+  .row {
+    display: flex;
+    flex-direction: column;
+
+    >.column {
+      margin-bottom: 2rem;
+    }
+  }
+
+  .sources {
+    display: flex;
+    padding-left: 0;
+    padding-right: 2rem;
+
+    @media (max-width: 600px) {
+      padding-right: 0;
+    }
+
+    @media (max-width: 900px) {
+      flex-direction: column;
+    }
+
+    .source-block {
+      border: 1px solid $white;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      border-radius: 5px;
+
+      &:first-child {
+        margin-right: .5rem;
+
+        @media (max-width: 900px) {
+          margin-right: 0;
+        }
+      }
+
+      &:last-child {
+        margin-left: .5rem;
+
+        @media (max-width: 900px) {
+          margin-left: 0;
+        }
+      }
+    }
+
+    .source-name {
+      line-height: 1.5rem;
+      // max-width: 400px;
+
+      strong {
+        color: $yellow;
+      }
+    }
+
+    .source-link {
+      display: block;
+      line-height: 1.5rem;
+
+      i {
+        font-size: .8rem;
+      }
+    }
+  }
+
+  .updated {
+    small {
+      display: inline-block;
+      font-size: .8rem;
+      line-height: 1.5rem;
+      color: $orange;
+      margin-top: .5rem;
+
+      @media (max-width: 600px) {
+        margin-top: 1rem;
+      }
+
+      i {
+        display: inline-block;
+        margin-right: .5rem;
+        font-size: .8rem;
+        line-height: 1.5rem;
+        
+        @media (max-width: 600px) {
+          margin-right: .2rem;
+        }
+      }
+
+    }
+  }
+
+  .collaborators {
+    li {
+      display: block;
+      color: #fff;
+
+      a {
+        display: flex;
+        align-items: center;
+        margin: 0.5rem 0;
+        transition: ease .3s;
+
+        &:hover {
+          color: $yellow-dark;
+
+          i {
+            color: $yellow;
+            border-color: $yellow;
+          }
+        }
+      }
+
+      i {
+        transition: ease .3s;
+        font-size: .8rem;
+        line-height: .8rem;
+        color: $white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 0.5rem;
+        border: 1px solid $white;
+        border-radius: 4px;
+        padding: .3rem .2rem .2rem .3rem;
+      }
+    }
+  }
+}
