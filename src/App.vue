@@ -10,6 +10,11 @@ export default {
   metaInfo: {
     title: 'Coronavírus',
     titleTemplate: '%s | Casos confirmados no Brasil'
+  },
+
+  created() {
+    // firebase analytics trigger
+    this.$analytics.logEvent("notification_received");
   }
 };
 </script>

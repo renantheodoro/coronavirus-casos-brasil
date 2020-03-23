@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "coronavirus-d8238",
     "public": "public",
     "ignore": [
       "firebase.json",

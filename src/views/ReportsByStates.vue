@@ -1,7 +1,7 @@
 <template>
   <main>
     <section class="main-content">
-      <h2 class="main-question">
+      <h2 class="header">
         Casos confirmados de
         <br />
         <strong class="highlight">Coronavírus</strong>

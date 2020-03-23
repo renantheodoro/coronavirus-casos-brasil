@@ -5,7 +5,7 @@
   justify-content: flex-start;
   padding: 4rem;
   padding-bottom: 8%;
-  background: $background;
+  background: $grey-blue;
 
   position: relative;
 
@@ -42,69 +42,161 @@ a {
 }
 
 .results-report {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   width: 100%;
-  max-width: 500px;
+  max-width: 400px;
 
-  @media (max-width: 600px) {
-    flex-direction: column;
+  &>.row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @media (max-width: 600px) {
+      flex-direction: column;
+    }
+
+    &:first-child {
+      margin-bottom: 2rem;
+
+      @media (max-width: 600px) {
+        margin-bottom: 0;
+      }
+    }
   }
 
-  .main-response {
+  .report-item {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     position: relative;
-    margin-bottom: 3rem;
+    width: 225px;
 
     @media (max-width: 600px) {
-      margin-bottom: 4rem;
+      margin-bottom: 2rem;
     }
   }
 
-  .main-response .report-number {
+  .report-item .report-number {
     font-weight: bold;
     font-size: 6rem;
-    color: $report;
+    color: $white;
 
     @media (max-width: 600px) {
-      font-size: 8rem;
+      font-size: 5rem;
     }
   }
 
-  .main-response .report-legend {
+  .report-item .report-legend {
     display: block;
     font-size: 1rem;
     color: $text;
-    background-color: $text-light;
+    background-color: $white;
     padding: 6px;
     border-radius: 4px;
+    text-transform: uppercase;
 
     strong {
       font-weight: bold;
     }
   }
 
-  .main-response.-health-text {
+  /* Casos confirmados */
+  .report-item.-confirmed {
     .report-number {
       color: $yellow;
     }
+
+    .report-legend {
+      background-color: $yellow;
+    }
+
     .report-legend strong {
-      color: $yellow;
+      // color: $yellow;
     }
   }
 
-  .main-response.-media-text {
+  /* Mortes confirmadas */
+  .report-item.-deaths {
     .report-number {
-      color: $question;
+      color: $pink;
     }
+
+    .report-legend {
+      color: $white;
+      background-color: $pink;
+    }
+
     .report-legend strong {
-      color: $question;
+      // color: $yellow;
     }
   }
+
+  /* Casos resolvidos */
+  .report-item.-recovered {
+    .report-number {
+      color: $green;
+    }
+
+    .report-legend {
+      color: $white;
+      background-color: $green;
+    }
+
+    .report-legend strong {
+      // color: $yellow;
+    }
+  }
+
+  .updated-message {
+    position: relative;
+    margin-top: 2rem;
+    background-color: $grey-blue;
+    padding: .5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(255, 255, 255, .4);
+    
+    p {
+      color: $white;
+      
+    }
+    
+    p strong {
+      color: $yellow;
+    }
+    
+    @media (max-width: 600px) {
+      background-color: unset;
+      box-shadow: unset;
+      border-radius: 0;
+      margin-top: 0;
+      text-shadow: 0 2px 5px rgba(0, 0, 0, .8);
+
+      p {
+        font-size: 1rem;
+      }
+    }
+
+  }
+
+  /* Ministério da Saúde */
+  // .report-item.-health-text {
+  //   .report-number {
+  //     color: $yellow;
+  //   }
+  //   .report-legend strong {
+  //     color: $yellow;
+  //   }
+  // }
+
+  /* Mídia */
+  // .report-item.-media-text {
+  //   .report-number {
+  //     color: $green;
+  //   }
+  //   .report-legend strong {
+  //     color: $green;
+  //   }
+  // }
 }
 
 .link-see-all-results {
@@ -121,6 +213,12 @@ a {
   text-transform: uppercase;
 
   transition: ease 0.3s;
+
+  margin-top: 5rem;
+
+  @media (max-width: 600px) {
+    margin-top: 4rem;
+  }
 
   &:hover {
     background-color: $yellow-dark;
