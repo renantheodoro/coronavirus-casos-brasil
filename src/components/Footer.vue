@@ -58,7 +58,7 @@
           <p v-if="$results.updatedAt" class="updated">
             {{ $results.updatedAt }}
             <br>
-            <small><i class="im im-info"></i>Os dados são atualizados de <strong>hora em hora</strong>.</small>
+            <small class="updated-hour"><i class="im im-info"></i>Os dados são atualizados de <strong>hora em hora</strong>.</small>
           </p>
         </div>
         <div class="column">

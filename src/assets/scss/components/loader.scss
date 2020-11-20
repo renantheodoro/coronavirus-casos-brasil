@@ -12,16 +12,6 @@
   }
 }
 
-@keyframes spin3D {
-  from {
-    transform: rotate3d(0.5, 0.5, 0.5, 360deg);
-  }
-
-  to {
-    transform: rotate3d(0deg);
-  }
-}
-
 @keyframes configure-clockwise {
   0% {
     transform: rotate(0);

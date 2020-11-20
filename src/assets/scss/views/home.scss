@@ -49,17 +49,11 @@ a {
     display: flex;
     align-items: center;
     justify-content: center;
+    
+    margin-bottom: 2rem;
 
     @media (max-width: 600px) {
       flex-direction: column;
-    }
-
-    &:first-child {
-      margin-bottom: 2rem;
-
-      @media (max-width: 600px) {
-        margin-bottom: 0;
-      }
     }
   }
 
@@ -71,18 +65,15 @@ a {
     position: relative;
     width: 225px;
 
-    @media (max-width: 600px) {
-      margin-bottom: 2rem;
-    }
   }
 
   .report-item .report-number {
     font-weight: bold;
-    font-size: 6rem;
+    font-size: 5rem;
     color: $white;
 
     @media (max-width: 600px) {
-      font-size: 5rem;
+      font-size: 3rem;
     }
   }
 
@@ -110,9 +101,6 @@ a {
       background-color: $yellow;
     }
 
-    .report-legend strong {
-      // color: $yellow;
-    }
   }
 
   /* Mortes confirmadas */
@@ -126,9 +114,6 @@ a {
       background-color: $pink;
     }
 
-    .report-legend strong {
-      // color: $yellow;
-    }
   }
 
   /* Casos resolvidos */
@@ -142,9 +127,6 @@ a {
       background-color: $green;
     }
 
-    .report-legend strong {
-      // color: $yellow;
-    }
   }
 
   .updated-message {

@@ -11,7 +11,11 @@
       <div v-if="$results.report" class="results-report">
         <div class="row">
           <p class="report-item -confirmed">
-            <big class="report-number">{{ $results.report.confirmed }}</big>
+            <big v-if="$results.report.confirmed" class="report-number">{{
+              $results.report.confirmed
+                .toString()
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+            }}</big>
             <span class="report-legend">
               <strong>Casos confirmados</strong>
             </span>
@@ -19,13 +23,23 @@
         </div>
         <div class="row">
           <p class="report-item -deaths">
-            <big class="report-number">{{ $results.report.deaths }}</big>
+            <big v-if="$results.report.deaths" class="report-number">{{
+              $results.report.deaths
+                .toString()
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+            }}</big>
             <span class="report-legend">
               <strong>Mortes confirmadas</strong>
             </span>
           </p>
+        </div>
+        <div class="row">
           <p class="report-item -recovered">
-            <big class="report-number">{{ $results.report.recovered }}</big>
+            <big v-if="$results.report.recovered" class="report-number">{{
+              $results.report.recovered
+                .toString()
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+            }}</big>
             <span class="report-legend">
               <strong>Casos recuperados</strong>
             </span>
@@ -38,6 +52,13 @@
               Atualizado há <strong>{{ $results.updatedInMinutes }}</strong>
             </p>
           </div>
+        </div>
+
+        <div class="row">
+          <small class="updated-hour"
+            ><i class="im im-info"></i>Os dados são atualizados de <br />
+            <strong>hora em hora</strong>.</small
+          >
         </div>
 
         <!-- <p v-if="$results.report" class="report-item -health-text">
@@ -82,22 +103,22 @@
 </template>
 
 <script>
-import Loader from '@/components/Loader';
-import Footer from '@/components/Footer';
+import Loader from "@/components/Loader";
+import Footer from "@/components/Footer";
 
 export default {
-  name: 'IndexReport',
+  name: "IndexReport",
 
   components: { Loader, Footer },
 
   props: {
-    msg: String
+    msg: String,
   },
 
   data() {
     return {
       report: null,
-      errorMessage: false
+      errorMessage: false,
     };
   },
 
@@ -112,25 +133,25 @@ export default {
       let year;
 
       let monthArr = [
-        'janeiro',
-        'fevereiro',
-        'março',
-        'abril',
-        'maio',
-        'junho',
-        'julho',
-        'agosto',
-        'setembro',
-        'outubro',
-        'novembro',
-        'dezembro'
+        "janeiro",
+        "fevereiro",
+        "março",
+        "abril",
+        "maio",
+        "junho",
+        "julho",
+        "agosto",
+        "setembro",
+        "outubro",
+        "novembro",
+        "dezembro",
       ];
 
-      day = date.split('/')[0];
-      month = monthArr[parseInt(date.split('/')[1]) - 1];
-      year = date.split('/')[2].replace(' ', ' às ');
+      day = date.split("/")[0];
+      month = monthArr[parseInt(date.split("/")[1]) - 1];
+      year = date.split("/")[2].replace(" ", " às ");
 
-      return day + ' de ' + month + ' de ' + year;
+      return day + " de " + month + " de " + year;
     },
 
     closeLoader() {
@@ -140,7 +161,7 @@ export default {
 
     reloadPage() {
       location.reload();
-    }
-  }
+    },
+  },
 };
 </script>
