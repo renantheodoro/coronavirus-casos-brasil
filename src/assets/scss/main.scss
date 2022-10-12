@@ -1,18 +1,18 @@
 /* Imports */
 @import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap");
-@import "./_partials/reset";
-@import "./_partials/colors";
+@import "_partials/reset";
+@import "_partials/colors";
 
 /* Views */
-@import "./views/home.scss",
-"./views/report-by-states.scss";
+@import "views/home.scss",
+"views/report-by-states.scss";
 
 /* Components */
-@import "./components/loader.scss";
+@import "components/loader.scss";
 
 /* Sections */
-@import "./sections/header.scss",
-"./sections/footer.scss";
+@import "sections/header",
+"sections/footer";
 
 $footer-height: 168px;
 
