@@ -8,40 +8,35 @@
         <strong class="yellow">no Brasil</strong>
       </h1>
 
-      <div v-if="$results.report" class="results-report">
-        <div class="row">
+      <div v-if="report" class="results-report">
+        <div v-if="report.confirmed" class="row">
           <p class="report-item -confirmed">
-            <big v-if="$results.report.confirmed" class="report-number">{{
-              $results.report.confirmed
-                .toString()
-                .replace(/\B(?=(\d{3})+(?!\d))/g, ".")
-            }}</big>
+            <span class="report-number">{{
+              report.confirmed.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+            }}</span>
             <span class="report-legend">
               <strong>Casos confirmados</strong>
             </span>
           </p>
         </div>
         <div class="row">
-          <p class="report-item -deaths">
-            <big v-if="$results.report.deaths" class="report-number">{{
-              $results.report.deaths
-                .toString()
-                .replace(/\B(?=(\d{3})+(?!\d))/g, ".")
-            }}</big>
+          <p v-if="report.deaths" class="report-item -deaths">
+            <span class="report-number">{{
+              report.deaths.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+            }}</span>
             <span class="report-legend">
               <strong>Mortes confirmadas</strong>
             </span>
           </p>
         </div>
-        <div class="row">
+
+        <div v-if="report.recovered" class="row">
           <p class="report-item -recovered">
-            <big v-if="$results.report.recovered" class="report-number">{{
-              $results.report.recovered
-                .toString()
-                .replace(/\B(?=(\d{3})+(?!\d))/g, ".")
-            }}</big>
+            <span class="report-number">{{
+              report.recovered.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+            }}</span>
             <span class="report-legend">
-              <strong>Casos recuperados</strong>
+              <strong>Casos recuperadossss</strong>
             </span>
           </p>
         </div>
@@ -49,7 +44,7 @@
         <div class="row">
           <div class="updated-message">
             <p>
-              Atualizado há <strong>{{ $results.updatedInMinutes }}</strong>
+              Atualizado há <strong>{{ updatedInMinutes }}</strong>
             </p>
           </div>
         </div>
@@ -61,16 +56,16 @@
           >
         </div>
 
-        <!-- <p v-if="$results.report" class="report-item -health-text">
-          <big class="report-number">{{ $results.report.cases }}</big>
+        <!-- <p v-if="report" class="report-item -health-text">
+          <span class="report-number">{{ report.cases }}</span>
           <span class="report-legend">
             Dados do
             <strong>Ministério da Saúde</strong>
           </span>
         </p>
 
-        <p v-if="$results.report" class="report-item -media-text">
-          <big class="report-number">{{ $results.report.cases_from_midia }}</big>
+        <p v-if="report" class="report-item -media-text">
+          <span class="report-number">{{ report.cases_from_midia }}</span>
           <span class="report-legend">
             Dados da
             <strong>Mídia</strong>
@@ -85,9 +80,9 @@
       > -->
     </section>
 
-    <Footer />
+    <Footer :updatedAt="updatedAt" />
 
-    <Loader v-if="$results.loader" @timedOut="closeLoader" />
+    <Loader v-if="loader" @timedOut="closeLoader" />
   </main>
 
   <div v-else class="error-message">
@@ -117,16 +112,73 @@ export default {
 
   data() {
     return {
-      report: null,
+      loader: true,
+      report: {
+        confirmed: null,
+        deaths: null,
+        recovered: null,
+      },
+
+      updatedAt: null,
+      updatedInMinutes: null,
       errorMessage: false,
     };
   },
 
   async created() {
-    this.$results.getResults();
+    this.getResults();
   },
 
   methods: {
+    getResults() {
+      this.axios
+        .get(
+          `https://coronavirus-tracker-api.herokuapp.com/v2/locations?country_code=BR`
+        )
+        .then((response) => {
+          this.report.confirmed = response.data.latest.confirmed;
+          this.report.deaths = response.data.latest.deaths;
+          this.report.recovered = response.data.latest.recovered;
+
+          console.log(response);
+
+          this.updatedAt = this.convertDate(
+            response.data.locations[0].last_updated
+          );
+
+          this.updatedInMinutes = this.convertDateInMinutes(
+            response.data.locations[0].last_updated
+          );
+        })
+        .catch(() => {
+          this.errorMessage = false;
+        })
+        .finally(() => {
+          this.loader = false;
+        });
+    },
+
+    convertDate(ts) {
+      return new Date(ts).toLocaleString().replace(" ", " às ");
+    },
+
+    convertDateInMinutes(ts) {
+      const date = new Date() - new Date(ts);
+      const minutes = new Date(date).getMinutes();
+
+      let messageInMinutes;
+
+      if (minutes >= 60) {
+        messageInMinutes = "1 hora e " + (minutes - 60) + " minutos";
+      } else if (minutes < 1) {
+        messageInMinutes = "menos de um minuto";
+      } else {
+        messageInMinutes = minutes + " minutos";
+      }
+
+      return messageInMinutes;
+    },
+
     getDate(date) {
       let day;
       let month;

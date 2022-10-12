@@ -5,7 +5,7 @@
 
       <div class="sources">
         <div
-          v-for="(source, index) in $results.sources"
+          v-for="(source, index) in sources"
           :key="index"
           class="source-block"
         >
@@ -41,11 +41,11 @@
           <br /> -->
       </div>
 
-      <!-- <p v-if="$results.updatedAt" class="updated">
+      <!-- <p v-if="results.updatedAt" class="updated">
         <small>
           Atualização em:
           <br />
-          <strong>{{ $results.updatedAt }}</strong>
+          <strong>{{ results.updatedAt }}</strong>
         </small>
       </p> -->
     </div>
@@ -55,10 +55,13 @@
         <div class="column">
           <h2>Atualizado em:</h2>
 
-          <p v-if="$results.updatedAt" class="updated">
-            {{ $results.updatedAt }}
-            <br>
-            <small class="updated-hour"><i class="im im-info"></i>Os dados são atualizados de <strong>hora em hora</strong>.</small>
+          <p v-if="updatedAt" class="updated">
+            {{ updatedAt }}
+            <br />
+            <small class="updated-hour"
+              ><i class="im im-info"></i>Os dados são atualizados de
+              <strong>hora em hora</strong>.</small
+            >
           </p>
         </div>
         <div class="column">
@@ -66,18 +69,18 @@
 
           <ul class="collaborators">
             <li>
-              <a href="https://www.linkedin.com/in/darleisoares/">
-                <i class="im im-linkedin"></i>
-                Darlei Santos Soares
-              </a>
-            </li>
-            <li>
               <a
                 href="https://br.linkedin.com/in/renantheodoro"
                 target="_blank"
               >
                 <i class="im im-linkedin"></i>
                 Renan Barbosa Theodoro
+              </a>
+            </li>
+            <li>
+              <a href="https://www.linkedin.com/in/darleisoares/">
+                <i class="im im-linkedin"></i>
+                Darlei Santos Soares
               </a>
             </li>
           </ul>
@@ -89,8 +92,33 @@
 
 <script>
 export default {
-  name: 'Footer',
+  name: "Footer",
 
-  mounted() {}
+  data() {
+    return {
+      sources: [
+        {
+          name:
+            "Johns Hopkins University Center for Systems Science and Engineering",
+          initials: "JHU CSSE",
+          repository: "https://github.com/CSSEGISandData/COVID-19",
+          website: "https://systems.jhu.edu/",
+        },
+        {
+          name:
+            "U.S. County data that comes from the Conference of State Bank Supervisors",
+          initials: "CSBS",
+          repository: "https://www.csbs.org/information-covid-19-coronavirus",
+          website: "https://www.csbs.org/",
+        },
+      ],
+    };
+  },
+
+  props: {
+    updatedAt: {
+      type: String,
+    },
+  },
 };
 </script>
